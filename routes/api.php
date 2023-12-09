@@ -23,5 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::resource('productos', ProductController::class);
+Route::post('/productos/carrito', [ProductController::class, 'getCart']);
+
 Route::resource('categorias', CategoryController::class);
 Route::resource('marcas', BrandController::class);

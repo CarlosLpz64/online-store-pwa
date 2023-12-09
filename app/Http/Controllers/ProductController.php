@@ -14,6 +14,18 @@ class ProductController extends Controller
         return response()->json($data);
     }
 
+    public function getCart(Request $request)
+    {
+        $payloadIds = $request->input('ids', []);
+        if (empty($payloadIds)) {
+            return response()->json(['message' => 'No se proporcionaron IDs'], 400);
+        }
+        $data = Product::with('brand', 'category')
+            ->whereIn('id', $payloadIds)
+            ->get();
+        return response()->json($data);
+    }
+
     public function show($id)
     {
         $data = Product::with('brand', 'category')->find($id);
