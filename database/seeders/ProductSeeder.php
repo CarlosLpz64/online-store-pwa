@@ -94,12 +94,23 @@ class ProductSeeder extends Seeder
 
         #8
         Product::create([
-            'name' => 'Player deportiva Nike',
+            'name' => 'Playera deportiva Nike',
             'description' => 'Playera Nike Dri-Fit Talla 25',
             'image_path' => 'https://www.mundodeportivo.com.mx/cdn/shop/products/1_4d2769e6-24cb-4af8-a501-2f7bd784c7d3_2048x.jpg?v=1662745020',
             'stock' => 50,
             'price' => 700,
             'brand_id' => 2,
+            'category_id' => 2
+        ]);
+
+        #9
+        Product::create([
+            'name' => 'Hoddie Seventeen',
+            'description' => 'Hoddie Blanco Seventeen Talla 28',
+            'image_path' => 'https://www.kpopiashop.com/media/catalog/product/cache/c8d47fa6f50dbeb94385d5c00e4ec487/h/o/hood-seventeen8.jpg',
+            'stock' => 17,
+            'price' => 1300,
+            'brand_id' => 6,
             'category_id' => 2
         ]);
     }

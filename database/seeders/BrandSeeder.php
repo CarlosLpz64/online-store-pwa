@@ -48,5 +48,12 @@ class BrandSeeder extends Seeder
             'description' => 'Pantalones de calidad',
             'logo_path' => 'https://brandlogos.net/wp-content/uploads/2013/03/levis-vector-logo-400x400.png',
         ]);
+
+        #6
+        Brand::create([
+            'name' => 'Seventeen Merch',
+            'description' => 'Mercancía oficial de Seventeen',
+            'logo_path' => 'https://www.nacionrex.com/export/sites/debate/img/2022/08/02/seventeen-logo-original.jpg_2016808803.jpg',
+        ]);
     }
 }
