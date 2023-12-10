@@ -18,7 +18,7 @@
                     </ul>
                     <div class="buttons mt-3 d-flex justify-content-center">
                         <a href="/" class="btn btn-outline-primary mx-2">Regresar</a>
-                        <a href="/agregar/{{ $data['id'] }}" class="btn btn-success mx-2">Agregar al Carrito <x-bx-cart class="icon-cart" /></a>
+                        <button class="btn btn-success mx-2" onclick="agregarAlCarrito({{ $data['id'] }})">Agregar al Carrito <x-bx-cart class="icon-cart" /></button>
                     </div>
                 </div>
             </div>
@@ -26,6 +26,14 @@
             <p class="mt-4">Producto no encontrado.</p>
         @endif
         <x-footer/>
+    <script>
+        function agregarAlCarrito(productId) {
+            // let basketIds = JSON.parse(localStorage.getItem('basketIds')) || [];
+            basketIds.push(productId);
+            localStorage.setItem('basketIds', JSON.stringify(basketIds));
+            window.location.href = "/producto-agregado";
+        }
+    </script>
     </main>
 </body>
 </html>

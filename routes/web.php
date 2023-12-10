@@ -24,6 +24,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ProductController::class, 'getViewindex']);
 Route::get('/detalle/{id}', [ProductController::class, 'getViewShow']);
-Route::get('/agregar/{id}', [ProductController::class, 'getViewSuccess']);
+Route::get('/producto-agregado', [ProductController::class, 'getViewSuccess']);
 Route::get('/carrito', [ProductController::class, 'getViewBasket']);
+Route::post('/carrito', [ProductController::class, 'getViewBasketPost']);
+Route::get('/compra-exitosa', function () {
+    return view('purchased');
+});
 

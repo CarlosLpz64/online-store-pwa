@@ -1,5 +1,3 @@
-<!-- resources/views/carrito.blade.php -->
-
 <!DOCTYPE html>
 <html lang="es">
 <x-head/>
@@ -33,7 +31,7 @@
                     <h4>Total: ${{ $total }}</h4>
                 </div>
                 <div class="buttons mt-3">
-                    <a href="/realizar-compra" class="btn btn-success mx-2">Realizar Compra</a>
+                    <button class="btn btn-success mx-2" onclick="confirmarCompra()">Realizar Compra</button>
                     <a href="/" class="btn btn-outline-primary mx-2">Seguir Comprando</a>
                 </div>
             @else
@@ -44,6 +42,13 @@
             @endif
         </div>
         <x-footer/>
+
+        <script>
+        function confirmarCompra() {
+            localStorage.setItem('basketIds', JSON.stringify([]));
+            window.location.href = "/compra-exitosa";
+        }
+    </script>
     </main>
 </body>
 </html>

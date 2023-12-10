@@ -53,24 +53,56 @@ class ProductController extends Controller
         return view('detail', ["data"=>$data]);
     }
 
-    public function getViewSuccess($id)
+    public function getViewSuccess()
     {
         return view('success');
     }
 
+    public function filterUniqueIds($data)
+    {
+        $uniqueIds = array_values(array_unique($data));
+        $mapIds = array_count_values($data);
+        return [
+            'uniqueIds' => $uniqueIds,
+            'mapIds' => $mapIds,
+        ];
+    }
     public function getViewBasket()
     {
-        $data = Product::with('brand', 'category')->get();
+        $result = $this->filterUniqueIds([1,1,1,2,2,3,3,4,4,5]);
+        $uniqueIds = $result['uniqueIds'];
+        $mapIds = $result['mapIds'];
+        $data = Product::with('brand', 'category')
+            ->whereIn('id', $uniqueIds)
+            ->get();
         $total = 0;
 
         foreach ($data as &$product) {
-            $product['quantity'] = 1;
+            $product['quantity'] = $mapIds[$product['id']];
             $total += $product['price'] * $product['quantity'];
         }
 
         return view('basket', ["data" => $data, "total" => $total]);
     }
 
+    public function getViewBasketPost(Request $request)
+    {
+        $payloadIds = $request->input('basketIds', []);
+        $result = $this->filterUniqueIds($payloadIds);
+        $uniqueIds = $result['uniqueIds'];
+        $mapIds = $result['mapIds'];
+        $data = Product::with('brand', 'category')
+            ->whereIn('id', $uniqueIds)
+            ->get();
+        $total = 0;
+
+        foreach ($data as &$product) {
+            $product['quantity'] = $mapIds[$product['id']];
+            $total += $product['price'] * $product['quantity'];
+        }
+
+        return view('basket', ["data" => $data, "total" => $total]);
+    }
 
     public function store(Request $request)
     {
