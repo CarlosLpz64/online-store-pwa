@@ -13,22 +13,27 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
+        # 1
         Category::create([
             'name' => 'Gorras'
         ]);
 
+        #2
         Category::create([
             'name' => 'Playeras'
         ]);
 
+        #3
         Category::create([
             'name' => 'Pantalones'
         ]);
 
+        #4
         Category::create([
             'name' => 'Accesorios'
         ]);
 
+        #5
         Category::create([
             'name' => 'Zapatos'
         ]);

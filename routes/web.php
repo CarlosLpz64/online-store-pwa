@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/* Route::get('/', function () {
     return view('welcome');
-});
+}); */
+
+/* Route::get('/', function () {
+    return view('home');
+}); */
+
+Route::get('/', [ProductController::class, 'getViewindex']);
+Route::get('/detalle/{id}', [ProductController::class, 'getViewShow']);
+Route::get('/agregar/{id}', [ProductController::class, 'getViewSuccess']);
+Route::get('/carrito', [ProductController::class, 'getViewBasket']);
+
