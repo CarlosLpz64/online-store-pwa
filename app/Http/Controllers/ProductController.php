@@ -20,7 +20,7 @@ class ProductController extends Controller
         return view('home', ["data"=>$data]);
     }
 
-    public function getCart(Request $request)
+    /* public function getCart(Request $request)
     {
         $payloadIds = $request->input('ids', []);
         if (empty($payloadIds)) {
@@ -30,6 +30,24 @@ class ProductController extends Controller
             ->whereIn('id', $payloadIds)
             ->get();
         return response()->json($data);
+    } */
+
+    public function getCart(Request $request)
+    {
+        $payloadIds = $request->input('ids', []);
+        $result = $this->filterUniqueIds($payloadIds);
+        $uniqueIds = $result['uniqueIds'];
+        $mapIds = $result['mapIds'];
+        $data = Product::with('brand', 'category')
+            ->whereIn('id', $uniqueIds)
+            ->get();
+        $total = 0;
+
+        foreach ($data as &$product) {
+            $product['quantity'] = $mapIds[$product['id']];
+            $total += $product['price'] * $product['quantity'];
+        }
+        return response()->json(["data" => $data, "total" => $total]);
     }
 
     public function show($id)
