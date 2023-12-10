@@ -7,4 +7,5 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     <title>PWA Store</title>
+    @laravelPWA
 </head>
